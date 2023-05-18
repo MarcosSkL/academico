@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Row, Table, Form } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { useForm } from "react-hook-form";
+import { useRouter } from 'next/router';
 
 const Formulario = () => {
+
+    const {push} = useRouter()
 
     const { register, handleSubmit } = useForm();
 
@@ -12,6 +15,7 @@ const Formulario = () => {
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
         cursos.push(dados)
         window.localStorage.setItem('cursos', JSON.stringify(cursos))
+        push('/cursos')
         
     }
 
