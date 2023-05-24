@@ -7,9 +7,22 @@ import { useRouter } from 'next/router';
 
 const Formulario = () => {
 
-    const { push } = useRouter()
+    const { push, query } = useRouter()
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
+
+    useEffect(() => {
+
+        if (query.id) {
+            const cursos = JSON.parse(window.localStorage.getItem('cursos'))
+            const curso = cursos[query.id]
+
+            setValue('nome', curso.nome)
+            setValue('duracao', curso.duracao)
+            setValue('modalidade', curso.modalidade)
+        }
+
+    }, [query.id])
 
     function salvar(dados) {
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
@@ -38,13 +51,11 @@ const Formulario = () => {
                             <Form.Control type="text" placeholder="Modalidade" {...register('modalidade')} />
                         </Form.Group>
 
-                        <div className='flex gap-3 justify-center'>
-                            <Button variant="primary" onClick={handleSubmit(salvar)}>
-                                Salvar
-                            </Button>
+                        <Button variant="primary" onClick={handleSubmit(salvar)}>
+                            Salvar
+                        </Button>
 
-                            <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
-                        </div>
+                        <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
 
                     </Form>
 
