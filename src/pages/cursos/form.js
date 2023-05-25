@@ -4,6 +4,7 @@ import { Button, Card, Col, Row, Table, Form } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
+import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
 
 const Formulario = () => {
 
@@ -40,10 +41,17 @@ const Formulario = () => {
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
-                                Salvar
+                                <div className='flex gap-2'><AiOutlineCheck />
+                                    Salvar
+                                </div>
                             </Button>
 
-                            <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
+                            <Link href={'/cursos'} className='btn btn-primary text-white'>
+                                <div className='flex gap-2'>
+                                    <AiOutlineArrowLeft />
+                                    Voltar
+                                </div>
+                            </Link>
                         </div>
 
                     </Form>
