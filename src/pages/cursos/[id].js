@@ -17,16 +17,16 @@ const Formulario = () => {
             const cursos = JSON.parse(window.localStorage.getItem('cursos'))
             const curso = cursos[query.id]
 
-            setValue('nome', curso.nome)
-            setValue('duracao', curso.duracao)
-            setValue('modalidade', curso.modalidade)
+            for (let atributo in curso) {
+                setValue(atributo, curso[atributo])
+            }
         }
 
     }, [query.id])
 
     function salvar(dados) {
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-        cursos.push(dados)
+        cursos.splice(query.id, 1, dados)
         window.localStorage.setItem('cursos', JSON.stringify(cursos))
         push('/cursos')
 
@@ -51,11 +51,13 @@ const Formulario = () => {
                             <Form.Control type="text" placeholder="Modalidade" {...register('modalidade')} />
                         </Form.Group>
 
-                        <Button variant="primary" onClick={handleSubmit(salvar)}>
-                            Salvar
-                        </Button>
+                        <div className='flex gap-3 justify-center'>
+                            <Button variant="primary" onClick={handleSubmit(salvar)}>
+                                Salvar
+                            </Button>
 
-                        <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
+                            <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
+                        </div>
 
                     </Form>
 

@@ -50,7 +50,8 @@ const index = () => {
                                         </Link>
                                         <AiOutlineDelete
                                             onClick={() => excluir(i)}
-                                            className='text-danger glyphicon glyphicon-eye-open' />
+                                            type='submit'
+                                            className='text-danger' />
                                     </td>
                                     <td>{item.nome}</td>
                                     <td>{item.duracao}</td>
