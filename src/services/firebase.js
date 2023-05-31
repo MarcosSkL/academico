@@ -1,5 +1,5 @@
 import { initializeApp, getApp } from "firebase/app";
-import { getDatabase, set, ref } from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 
 let app
@@ -8,18 +8,18 @@ try {
     app = getApp()
 } catch (error) {
     const firebaseConfig = {
-        apiKey: process.env.FIREBASE_API_KEY,
-        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-        databaseURL: process.env.FIREBASE_DATABASE_URL,
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-        appId: process.env.FIREBASE_APP_ID
-    };
+        apiKey: "AIzaSyCQe6g7i17Y3jIjTpjhfMiB7kj9jvfLOR0",
+        authDomain: "academico-169f6.firebaseapp.com",
+        databaseURL: "https://academico-169f6-default-rtdb.firebaseio.com",
+        projectId: "academico-169f6",
+        storageBucket: "academico-169f6.appspot.com",
+        messagingSenderId: "981273295312",
+        appId: "1:981273295312:web:9f284e31cea8be242621d5"
+      };
 
     app = initializeApp(firebaseConfig);
 }
 
 const db = getDatabase(app)
 
-export { db, set, ref }
+export { db }
