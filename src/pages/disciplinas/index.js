@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Row, Table } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { AiOutlineDelete, AiFillEdit } from 'react-icons/ai'
+import axios from 'axios'
 
 const index = () => {
 
@@ -10,7 +11,7 @@ const index = () => {
 
     useEffect(() => {
         axios.get('/api/disciplinas').then(resultado =>
-            console.log(resultado.data)
+            setDisciplinas(resultado.data)
         )
     }, [])
 
@@ -26,8 +27,8 @@ const index = () => {
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th>Duracao</th>
-                                <th>Modalidade</th>
+                                <th>Curso</th>
+                        
                             </tr>
                         </thead>
                         <tbody>
@@ -43,8 +44,8 @@ const index = () => {
                                             className='text-danger' />
                                     </td>
                                     <td>{item.nome}</td>
-                                    <td>{item.duracao}</td>
-                                    <td>{item.modalidade}</td>
+                                    <td>{item.curso}</td>
+                                  
                                 </tr>
                             ))}
                         </tbody>
