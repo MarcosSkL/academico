@@ -18,7 +18,7 @@ const Pagina = (props) => {
       </Container>
 
       <div style={{ width: "100%" }} className="bg-secondary mt-5 position-fixed bottom-0 py-3 text-white text-center">
-        <p>@MarcosSkL</p>
+        <p>©2023 MarcosSkL</p>
       </div>
 
     </div>

@@ -10,11 +10,24 @@ const index = () => {
     const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(() => {
-        axios.get('/api/disciplinas').then(resultado =>
-            setDisciplinas(resultado.data)
-        )
+        getAll()
     }, [])
 
+    function getAll() {
+
+        axios.get('/api/disciplinas').then(resultado => {
+            setDisciplinas(resultado.data)
+
+        })
+    }
+
+
+    function excluir(id) {
+        if (confirm("Deseja excluir o registro?")) {
+            axios.delete('/api/disciplinas/' + id)
+            getAll()
+        }
+    }
 
     return (
 
@@ -28,24 +41,24 @@ const index = () => {
                                 <th>#</th>
                                 <th>Nome</th>
                                 <th>Curso</th>
-                        
+
                             </tr>
                         </thead>
                         <tbody>
-                            {disciplinas.map((item, i) => (
-                                <tr>
+                            {disciplinas.map((item, id) => (
+                                <tr key={item.id}>
                                     <td className='flex gap-3'>
-                                        <Link href={'/disciplinas/' + i}>
+                                        <Link href={'/disciplinas/' + item.id}>
                                             <AiFillEdit className='ms-2 text-primary' />
                                         </Link>
                                         <AiOutlineDelete
-                                            onClick={() => excluir(i)}
+                                            onClick={() => excluir(item.id)}
                                             type='submit'
                                             className='text-danger' />
                                     </td>
                                     <td>{item.nome}</td>
                                     <td>{item.curso}</td>
-                                  
+
                                 </tr>
                             ))}
                         </tbody>

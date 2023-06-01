@@ -4,32 +4,31 @@ import { Button, Card, Col, Row, Table, Form } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
-const Formulario = () => {
+const FormDisciplinas = () => {
 
     const { push, query } = useRouter()
-
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue } = useForm()
 
     useEffect(() => {
 
         if (query.id) {
-            const cursos = JSON.parse(window.localStorage.getItem('cursos'))
-            const curso = cursos[query.id]
 
-            for (let atributo in curso) {
-                setValue(atributo, curso[atributo])
-            }
+            axios.get('/api/disciplinas/' + query.id).then(resultado => {
+                const disciplina = resultado.data
+
+                for (let atributo in disciplina) {
+                    setValue(atributo, disciplina[atributo])
+                }
+            })
         }
 
     }, [query.id])
 
     function salvar(dados) {
-        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-        cursos.splice(query.id, 1, dados)
-        window.localStorage.setItem('cursos', JSON.stringify(cursos))
-        push('/cursos')
-
+        axios.put('/api/disciplinas/' + dados.id, dados)
+        push('/disciplinas')
     }
 
     return (
@@ -42,21 +41,18 @@ const Formulario = () => {
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="text" placeholder="Nome" {...register('nome')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Duração">
+                        <Form.Group className="mb-3" controlId="Curso">
                             <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao')} />
+                            <Form.Control type="text" placeholder="Curso" {...register('curso')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Modalidade">
-                            <Form.Label>Modalidade</Form.Label>
-                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade')} />
-                        </Form.Group>
+
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
                                 Salvar
                             </Button>
 
-                            <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
+                            <Link href={'/disciplinas'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
                         </div>
 
                     </Form>
@@ -68,4 +64,4 @@ const Formulario = () => {
     )
 }
 
-export default Formulario
+export default FormDisciplinas
