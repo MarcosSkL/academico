@@ -5,6 +5,7 @@ import Pagina from '../../components/Pagina'
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
+import axios from 'axios';
 
 const Formulario = () => {
 
@@ -13,10 +14,9 @@ const Formulario = () => {
     const { register, handleSubmit } = useForm();
 
     function salvar(dados) {
-        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-        cursos.push(dados)
-        window.localStorage.setItem('cursos', JSON.stringify(cursos))
-        push('/cursos')
+        
+        axios.post('/api/disciplinas', dados)
+        push('/disciplinas')
 
     }
 
@@ -30,14 +30,11 @@ const Formulario = () => {
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="text" placeholder="Nome" {...register('nome')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Duração">
-                            <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao')} />
+                        <Form.Group className="mb-3" controlId="Curso">
+                            <Form.Label>Curso</Form.Label>
+                            <Form.Control type="text" placeholder="Curso" {...register('curso')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Modalidade">
-                            <Form.Label>Modalidade</Form.Label>
-                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade')} />
-                        </Form.Group>
+                        
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
@@ -46,7 +43,7 @@ const Formulario = () => {
                                 </div>
                             </Button>
 
-                            <Link href={'/cursos'} className='btn btn-primary text-white'>
+                            <Link href={'/disciplinas'} className='btn btn-primary text-white'>
                                 <div className='flex gap-2'>
                                     <AiOutlineArrowLeft />
                                     Voltar

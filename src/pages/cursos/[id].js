@@ -4,17 +4,29 @@ import { Button, Card, Col, Row, Table, Form } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
-import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
 
 const Formulario = () => {
 
-    const { push } = useRouter()
+    const { push, query } = useRouter()
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
+
+    useEffect(() => {
+
+        if (query.id) {
+            const cursos = JSON.parse(window.localStorage.getItem('cursos'))
+            const curso = cursos[query.id]
+
+            for (let atributo in curso) {
+                setValue(atributo, curso[atributo])
+            }
+        }
+
+    }, [query.id])
 
     function salvar(dados) {
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-        cursos.push(dados)
+        cursos.splice(query.id, 1, dados)
         window.localStorage.setItem('cursos', JSON.stringify(cursos))
         push('/cursos')
 
@@ -41,17 +53,10 @@ const Formulario = () => {
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
-                                <div className='flex gap-2'><AiOutlineCheck />
-                                    Salvar
-                                </div>
+                                Salvar
                             </Button>
 
-                            <Link href={'/cursos'} className='btn btn-primary text-white'>
-                                <div className='flex gap-2'>
-                                    <AiOutlineArrowLeft />
-                                    Voltar
-                                </div>
-                            </Link>
+                            <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
                         </div>
 
                     </Form>
