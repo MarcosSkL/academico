@@ -80,7 +80,7 @@ const FormAlterAlunos = () => {
 
 
 
-                        <div className='flex gap-3 justify-center'>
+                        <div className='flex gap-3 justify-center pb-5'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
                                 Salvar
                             </Button>

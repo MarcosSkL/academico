@@ -68,7 +68,7 @@ const Formulario = () => {
                         </Form.Group>
 
 
-                        <div className='flex gap-3 justify-center'>
+                        <div className='flex gap-3 justify-center pb-5'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
                                 <div className='flex gap-2'><AiOutlineCheck />
                                     Salvar
