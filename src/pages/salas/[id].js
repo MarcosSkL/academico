@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-const FormAlterCursos = () => {
+const FormAlterSalas = () => {
 
     const { push, query } = useRouter()
     const { register, handleSubmit, setValue } = useForm()
@@ -15,11 +15,11 @@ const FormAlterCursos = () => {
 
         if (query.id) {
 
-            axios.get('/api/cursos/' + query.id).then(resultado => {
-                const curso = resultado.data
+            axios.get('/api/salas/' + query.id).then(resultado => {
+                const sala = resultado.data
 
-                for (let atributo in curso) {
-                    setValue(atributo, curso[atributo])
+                for (let atributo in sala) {
+                    setValue(atributo, sala[atributo])
                 }
             })
         }
@@ -27,8 +27,8 @@ const FormAlterCursos = () => {
     }, [query.id])
 
     function salvar(dados) {
-        axios.put('/api/cursos/' + dados.id, dados)
-        push('/cursos')
+        axios.put('/api/salas/' + dados.id, dados)
+        push('/salas')
     }
 
     return (
@@ -41,21 +41,22 @@ const FormAlterCursos = () => {
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="text" placeholder="Nome" {...register('nome')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Duração">
-                            <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao')} />
+                        <Form.Group className="mb-3" controlId="Capacidade">
+                            <Form.Label>Capacidade</Form.Label>
+                            <Form.Control type="text" placeholder="Capacidade" {...register('capacidade')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Modalidade">
-                            <Form.Label>Modalidade</Form.Label>
-                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade')} />
+                        <Form.Group className="mb-3" controlId="Tipo">
+                            <Form.Label>Tipo</Form.Label>
+                            <Form.Control type="text" placeholder="Tipo" {...register('tipo')} />
                         </Form.Group>
+
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
                                 Salvar
                             </Button>
 
-                            <Link href={'/cursos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
+                            <Link href={'/professores'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
                         </div>
 
                     </Form>
@@ -67,4 +68,4 @@ const FormAlterCursos = () => {
     )
 }
 
-export default FormAlterCursos
+export default FormAlterSalas

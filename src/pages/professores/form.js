@@ -14,7 +14,7 @@ const Formulario = () => {
     const { register, handleSubmit } = useForm();
 
     function salvar(dados) {
-        
+
         axios.post('/api/professores', dados)
         push('/professores')
 
@@ -26,7 +26,7 @@ const Formulario = () => {
             <Row className="px-1 mx-1">
                 <Col>
                     <Form>
-                    <Form.Group className="mb-3" controlId="Nome">
+                        <Form.Group className="mb-3" controlId="Nome">
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="text" placeholder="Nome" {...register('nome')} />
                         </Form.Group>
@@ -70,7 +70,7 @@ const Formulario = () => {
                             <Form.Label>Bairro</Form.Label>
                             <Form.Control type="text" placeholder="Bairro" {...register('bairro')} />
                         </Form.Group>
-                        
+
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
