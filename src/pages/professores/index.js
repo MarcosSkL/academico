@@ -35,7 +35,7 @@ const index = () => {
             <Row className="px-1 mx-1">
                 <Col>
                     <Link href={'professores/form/'} className='btn btn-primary text-white'>Novo</Link>
-                    <Table bordered hover>
+                    <Table responsive bordered hover>
                         <thead>
                             <tr>
                                 <th>#</th>
