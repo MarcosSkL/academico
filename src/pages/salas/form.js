@@ -47,7 +47,7 @@ const Formulario = () => {
                                 </div>
                             </Button>
 
-                            <Link href={'/professores'} className='btn btn-primary text-white'>
+                            <Link href={'/salas'} className='btn btn-primary text-white'>
                                 <div className='flex gap-2'>
                                     <AiOutlineArrowLeft />
                                     Voltar

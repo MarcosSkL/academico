@@ -56,7 +56,7 @@ const FormAlterSalas = () => {
                                 Salvar
                             </Button>
 
-                            <Link href={'/professores'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
+                            <Link href={'/salas'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
                         </div>
 
                     </Form>
