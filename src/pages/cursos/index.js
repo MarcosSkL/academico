@@ -3,27 +3,29 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Row, Table } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { AiOutlineDelete, AiFillEdit } from 'react-icons/ai'
+import axios from 'axios'
 
 const index = () => {
 
     const [cursos, setCursos] = useState([])
 
     useEffect(() => {
-        setCursos(JSON.parse(window.localStorage.getItem('cursos')) || [])
+        getAll()
     }, [])
 
     function getAll() {
-        return JSON.parse(window.localStorage.getItem("cursos") || []);
+
+        axios.get('/api/cursos').then(resultado => {
+            setCursos(resultado.data)
+
+        })
     }
 
+
     function excluir(id) {
-
-        if (confirm("Dseja realmente exluir o registro?")) {
-
-            const cursos = getAll();
-            cursos.splice(id, 1);
-            window.localStorage.setItem(`cursos`, JSON.stringify(cursos));
-            setCursos(cursos);
+        if (confirm("Deseja excluir o registro?")) {
+            axios.delete('/api/cursos/' + id)
+            getAll()
         }
     }
     return (
@@ -45,11 +47,11 @@ const index = () => {
                             {cursos.map((item, i) => (
                                 <tr>
                                     <td className='flex gap-3'>
-                                        <Link href={'/cursos/' + i}>
+                                        <Link href={'/cursos/' + item.id}>
                                             <AiFillEdit className='ms-2 text-primary' />
                                         </Link>
                                         <AiOutlineDelete
-                                            onClick={() => excluir(i)}
+                                            onClick={() => excluir(item.id)}
                                             type='submit'
                                             className='text-danger' />
                                     </td>
