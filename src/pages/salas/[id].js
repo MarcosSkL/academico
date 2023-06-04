@@ -6,21 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-const FormAlterDisciplinas = () => {
-
-    const [cursos, setCursos] = useState([])
-
-    useEffect(() => {
-        getAll()
-    }, [])
-
-    function getAll() {
-
-        axios.get('/api/cursos').then(resultado => {
-            setCursos(resultado.data)
-
-        })
-    }
+const FormAlterSalas = () => {
 
     const { push, query } = useRouter()
     const { register, handleSubmit, setValue } = useForm()
@@ -29,11 +15,11 @@ const FormAlterDisciplinas = () => {
 
         if (query.id) {
 
-            axios.get('/api/disciplinas/' + query.id).then(resultado => {
-                const disciplina = resultado.data
+            axios.get('/api/salas/' + query.id).then(resultado => {
+                const sala = resultado.data
 
-                for (let atributo in disciplina) {
-                    setValue(atributo, disciplina[atributo])
+                for (let atributo in sala) {
+                    setValue(atributo, sala[atributo])
                 }
             })
         }
@@ -41,8 +27,8 @@ const FormAlterDisciplinas = () => {
     }, [query.id])
 
     function salvar(dados) {
-        axios.put('/api/disciplinas/' + dados.id, dados)
-        push('/disciplinas')
+        axios.put('/api/salas/' + dados.id, dados)
+        push('/salas')
     }
 
     return (
@@ -55,18 +41,13 @@ const FormAlterDisciplinas = () => {
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="text" placeholder="Nome" {...register('nome')} />
                         </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="Semestre">
-                            <Form.Label>Cursos</Form.Label>
-
-                            <Form.Select type="text" {...register('cursos')} >
-
-                                <option value="sem nome">Selecione o Curso</option>
-                                {cursos.map((item) => (
-                                    <option value={item.nome}>{item.nome}</option>
-                                ))}
-
-                            </Form.Select>
+                        <Form.Group className="mb-3" controlId="Capacidade">
+                            <Form.Label>Capacidade</Form.Label>
+                            <Form.Control type="text" placeholder="Capacidade" {...register('capacidade')} />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="Tipo">
+                            <Form.Label>Tipo</Form.Label>
+                            <Form.Control type="text" placeholder="Tipo" {...register('tipo')} />
                         </Form.Group>
 
 
@@ -75,7 +56,7 @@ const FormAlterDisciplinas = () => {
                                 Salvar
                             </Button>
 
-                            <Link href={'/disciplinas'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
+                            <Link href={'/salas'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
                         </div>
 
                     </Form>
@@ -87,4 +68,4 @@ const FormAlterDisciplinas = () => {
     )
 }
 
-export default FormAlterDisciplinas
+export default FormAlterSalas

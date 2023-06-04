@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const index = () => {
 
-    const [cursos, setCursos] = useState([])
+    const [semestres, setSemestres] = useState([])
 
     useEffect(() => {
         getAll()
@@ -15,8 +15,8 @@ const index = () => {
 
     function getAll() {
 
-        axios.get('/api/cursos').then(resultado => {
-            setCursos(resultado.data)
+        axios.get('/api/semestres').then(resultado => {
+            setSemestres(resultado.data)
 
         })
     }
@@ -24,30 +24,32 @@ const index = () => {
 
     function excluir(id) {
         if (confirm("Deseja excluir o registro?")) {
-            axios.delete('/api/cursos/' + id)
+            axios.delete('/api/semestres/' + id)
             getAll()
         }
     }
+
     return (
 
-        <Pagina titulo="Cursos">
+        <Pagina titulo="Semestres">
             <Row className="px-1 mx-1">
                 <Col>
-                    <Link href={'cursos/form/'} className='btn btn-primary text-white'>Novo</Link>
+                    <Link href={'semestres/form/'} className='btn btn-primary text-white'>Novo</Link>
                     <Table bordered hover>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nome</th>
-                                <th>Duracao</th>
-                                <th>Modalidade</th>
+                                <th>Semestre</th>
+                                <th>Data de Inicio</th>
+                                <th>Data de Fim</th>            
+
                             </tr>
                         </thead>
                         <tbody>
-                            {cursos.map((item, id) => (
+                            {semestres.map((item, id) => (
                                 <tr key={item.id}>
                                     <td className='flex gap-3'>
-                                        <Link href={'/cursos/' + item.id}>
+                                        <Link href={'/semestres/' + item.id}>
                                             <AiFillEdit className='ms-2 text-primary' />
                                         </Link>
                                         <AiOutlineDelete
@@ -55,9 +57,11 @@ const index = () => {
                                             type='submit'
                                             className='text-danger' />
                                     </td>
-                                    <td>{item.nome}</td>
-                                    <td>{item.duracao}</td>
-                                    <td>{item.modalidade}</td>
+                                    <td>{item.semestre}</td>
+                                    <td>{item.dataInicio}</td>
+                                    <td>{item.dataFim}</td>
+                            
+
                                 </tr>
                             ))}
                         </tbody>

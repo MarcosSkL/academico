@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const index = () => {
 
-    const [cursos, setCursos] = useState([])
+    const [salas, setSalas] = useState([])
 
     useEffect(() => {
         getAll()
@@ -15,8 +15,8 @@ const index = () => {
 
     function getAll() {
 
-        axios.get('/api/cursos').then(resultado => {
-            setCursos(resultado.data)
+        axios.get('/api/salas').then(resultado => {
+            setSalas(resultado.data)
 
         })
     }
@@ -24,30 +24,34 @@ const index = () => {
 
     function excluir(id) {
         if (confirm("Deseja excluir o registro?")) {
-            axios.delete('/api/cursos/' + id)
+            axios.delete('/api/salas/' + id)
             getAll()
         }
     }
+
     return (
 
-        <Pagina titulo="Cursos">
+        <Pagina titulo="Salas">
             <Row className="px-1 mx-1">
                 <Col>
-                    <Link href={'cursos/form/'} className='btn btn-primary text-white'>Novo</Link>
+                    <Link href={'salas/form/'} className='btn btn-primary text-white'>Novo</Link>
                     <Table bordered hover>
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th>Duracao</th>
-                                <th>Modalidade</th>
+                                <th>Capacidade</th>
+                                <th>Tipo</th>
+                            
+
+
                             </tr>
                         </thead>
                         <tbody>
-                            {cursos.map((item, id) => (
+                            {salas.map((item, id) => (
                                 <tr key={item.id}>
                                     <td className='flex gap-3'>
-                                        <Link href={'/cursos/' + item.id}>
+                                        <Link href={'/salas/' + item.id}>
                                             <AiFillEdit className='ms-2 text-primary' />
                                         </Link>
                                         <AiOutlineDelete
@@ -56,8 +60,10 @@ const index = () => {
                                             className='text-danger' />
                                     </td>
                                     <td>{item.nome}</td>
-                                    <td>{item.duracao}</td>
-                                    <td>{item.modalidade}</td>
+                                    <td>{item.capacidade}</td>
+                                    <td>{item.tipo}</td>
+                            
+
                                 </tr>
                             ))}
                         </tbody>

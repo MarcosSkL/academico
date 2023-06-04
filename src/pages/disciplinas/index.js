@@ -57,7 +57,7 @@ const index = () => {
                                             className='text-danger' />
                                     </td>
                                     <td>{item.nome}</td>
-                                    <td>{item.curso}</td>
+                                    <td>{item.cursos}</td>
 
                                 </tr>
                             ))}

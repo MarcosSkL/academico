@@ -4,20 +4,31 @@ import { Button, Card, Col, Row, Table, Form } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
-import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios';
 
-const Formulario = () => {
+const FormAlterAlunos = () => {
 
-    const { push } = useRouter()
+    const { push, query } = useRouter()
+    const { register, handleSubmit, setValue } = useForm()
 
-    const { register, handleSubmit } = useForm();
+    useEffect(() => {
+
+        if (query.id) {
+
+            axios.get('/api/alunos/' + query.id).then(resultado => {
+                const aluno = resultado.data
+
+                for (let atributo in aluno) {
+                    setValue(atributo, aluno[atributo])
+                }
+            })
+        }
+
+    }, [query.id])
 
     function salvar(dados) {
-
-        axios.post('/api/professores', dados)
-        push('/professores')
-
+        axios.put('/api/alunos/' + dados.id, dados)
+        push('/alunos')
     }
 
     return (
@@ -37,10 +48,6 @@ const Formulario = () => {
                         <Form.Group className="mb-3" controlId="Matricula">
                             <Form.Label>Matricula</Form.Label>
                             <Form.Control type="number" placeholder="Matricula" {...register('matricula')} />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="Salario">
-                            <Form.Label>Salario</Form.Label>
-                            <Form.Control type="text" placeholder="Salario" {...register('salario')} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Email">
                             <Form.Label>E-mail</Form.Label>
@@ -72,19 +79,13 @@ const Formulario = () => {
                         </Form.Group>
 
 
+
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
-                                <div className='flex gap-2'><AiOutlineCheck />
-                                    Salvar
-                                </div>
+                                Salvar
                             </Button>
 
-                            <Link href={'/professores'} className='btn btn-primary text-white'>
-                                <div className='flex gap-2'>
-                                    <AiOutlineArrowLeft />
-                                    Voltar
-                                </div>
-                            </Link>
+                            <Link href={'/alunos'} className='btn btn-primary gap-2 text-white'>Voltar</Link>
                         </div>
 
                     </Form>
@@ -96,4 +97,4 @@ const Formulario = () => {
     )
 }
 
-export default Formulario
+export default FormAlterAlunos

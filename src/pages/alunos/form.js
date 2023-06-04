@@ -15,8 +15,8 @@ const Formulario = () => {
 
     function salvar(dados) {
 
-        axios.post('/api/professores', dados)
-        push('/professores')
+        axios.post('/api/alunos', dados)
+        push('/alunos')
 
     }
 
@@ -37,10 +37,6 @@ const Formulario = () => {
                         <Form.Group className="mb-3" controlId="Matricula">
                             <Form.Label>Matricula</Form.Label>
                             <Form.Control type="number" placeholder="Matricula" {...register('matricula')} />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="Salario">
-                            <Form.Label>Salario</Form.Label>
-                            <Form.Control type="text" placeholder="Salario" {...register('salario')} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Email">
                             <Form.Label>E-mail</Form.Label>
@@ -79,7 +75,7 @@ const Formulario = () => {
                                 </div>
                             </Button>
 
-                            <Link href={'/professores'} className='btn btn-primary text-white'>
+                            <Link href={'/alunos'} className='btn btn-primary text-white'>
                                 <div className='flex gap-2'>
                                     <AiOutlineArrowLeft />
                                     Voltar

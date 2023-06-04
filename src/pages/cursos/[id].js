@@ -4,32 +4,31 @@ import { Button, Card, Col, Row, Table, Form } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
 import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
-const Formulario = () => {
+const FormAlterCursos = () => {
 
     const { push, query } = useRouter()
-
-    const { register, handleSubmit, setValue } = useForm();
+    const { register, handleSubmit, setValue } = useForm()
 
     useEffect(() => {
 
         if (query.id) {
-            const cursos = JSON.parse(window.localStorage.getItem('cursos'))
-            const curso = cursos[query.id]
 
-            for (let atributo in curso) {
-                setValue(atributo, curso[atributo])
-            }
+            axios.get('/api/cursos/' + query.id).then(resultado => {
+                const curso = resultado.data
+
+                for (let atributo in curso) {
+                    setValue(atributo, curso[atributo])
+                }
+            })
         }
 
     }, [query.id])
 
     function salvar(dados) {
-        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-        cursos.splice(query.id, 1, dados)
-        window.localStorage.setItem('cursos', JSON.stringify(cursos))
+        axios.put('/api/cursos/' + dados.id, dados)
         push('/cursos')
-
     }
 
     return (
@@ -68,4 +67,4 @@ const Formulario = () => {
     )
 }
 
-export default Formulario
+export default FormAlterCursos

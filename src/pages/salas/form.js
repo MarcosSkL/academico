@@ -7,16 +7,16 @@ import { useRouter } from 'next/router';
 import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios';
 
-const FormAlterCursos = () => {
+const Formulario = () => {
 
     const { push } = useRouter()
 
     const { register, handleSubmit } = useForm();
 
     function salvar(dados) {
-        
-        axios.post('/api/cursos', dados)
-        push('/cursos')
+
+        axios.post('/api/salas', dados)
+        push('/salas')
 
     }
 
@@ -30,14 +30,15 @@ const FormAlterCursos = () => {
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="text" placeholder="Nome" {...register('nome')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Duração">
-                            <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao')} />
+                        <Form.Group className="mb-3" controlId="Capacidade">
+                            <Form.Label>Capacidade</Form.Label>
+                            <Form.Control type="text" placeholder="Capacidade" {...register('capacidade')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Modalidade">
-                            <Form.Label>Modalidade</Form.Label>
-                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade')} />
+                        <Form.Group className="mb-3" controlId="Tipo">
+                            <Form.Label>Tipo</Form.Label>
+                            <Form.Control type="text" placeholder="Tipo" {...register('tipo')} />
                         </Form.Group>
+
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
@@ -46,7 +47,7 @@ const FormAlterCursos = () => {
                                 </div>
                             </Button>
 
-                            <Link href={'/cursos'} className='btn btn-primary text-white'>
+                            <Link href={'/salas'} className='btn btn-primary text-white'>
                                 <div className='flex gap-2'>
                                     <AiOutlineArrowLeft />
                                     Voltar
@@ -63,4 +64,4 @@ const FormAlterCursos = () => {
     )
 }
 
-export default FormAlterCursos
+export default Formulario
