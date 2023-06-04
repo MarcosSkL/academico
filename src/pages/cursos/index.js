@@ -44,8 +44,8 @@ const index = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {cursos.map((item, i) => (
-                                <tr>
+                            {cursos.map((item, id) => (
+                                <tr key={item.id}>
                                     <td className='flex gap-3'>
                                         <Link href={'/cursos/' + item.id}>
                                             <AiFillEdit className='ms-2 text-primary' />

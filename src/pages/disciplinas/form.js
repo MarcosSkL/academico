@@ -52,7 +52,7 @@ const Formulario = () => {
 
                                 <option value="sem nome">Selecione o Curso</option>
                                 {cursos.map((item) => (
-                                    <option value={item.nome}>{item.nome}</option>
+                                    <option key={item.id} value={item.nome}>{item.nome}</option>
                                 ))}
 
                             </Form.Select>

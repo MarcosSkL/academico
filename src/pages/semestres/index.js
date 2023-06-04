@@ -41,9 +41,7 @@ const index = () => {
                                 <th>#</th>
                                 <th>Semestre</th>
                                 <th>Data de Inicio</th>
-                                <th>Data de Fim</th>
-                            
-
+                                <th>Data de Fim</th>            
 
                             </tr>
                         </thead>
