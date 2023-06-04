@@ -35,51 +35,96 @@ const index = () => {
             <Row className="px-1 mx-1">
                 <Col>
                     <Link href={'alunos/form/'} className='btn btn-primary text-white'>Novo</Link>
-                    <Table responsive bordered hover>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Matricula</th>                        
-                                <th>Email</th>
-                                <th>Telefone</th>
-                                <th>CEP</th>
-                                <th>Logradouro</th>
-                                <th>Complemento</th>
-                                <th>Numero</th>
-                                <th>Bairro</th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {alunos.map((item, id) => (
-                                <tr key={item.id}>
-                                    <td className='flex gap-3'>
-                                        <Link href={'/alunos/' + item.id}>
-                                            <AiFillEdit className='ms-2 text-primary' />
-                                        </Link>
-                                        <AiOutlineDelete
-                                            onClick={() => excluir(item.id)}
-                                            type='submit'
-                                            className='text-danger' />
-                                    </td>
-                                    <td>{item.nome}</td>
-                                    <td>{item.cpf}</td>
-                                    <td>{item.matricula}</td>                                    
-                                    <td>{item.email}</td>
-                                    <td>{item.telefone}</td>
-                                    <td>{item.cep}</td>
-                                    <td>{item.logradouro}</td>
-                                    <td>{item.complemento}</td>
-                                    <td>{item.numero}</td>
-                                    <td>{item.bairro}</td>
-
+                    <div className="relative overflow-x-scroll shadow-md sm:rounded-lg pt-2 pb-4">
+                        <table className="w-full text-md text-left text-blue-100 dark:text-blue-100">
+                            <thead className="text-xs text-white uppercase bg-blue-500 border-b border-blue-400 dark:text-white">
+                                <tr>
+                                    <th scope="col" className="px-2 py-3">
+                                        #
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        Nome
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        CPF
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        Matricula
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        E-mail
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        Telefone
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        CEP
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        Logradouro
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        Complemento
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        Numero
+                                    </th>
+                                    <th scope="col" className="px-2 py-3">
+                                        Bairro
+                                    </th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                            </thead>
+                            <tbody>
+                                {alunos.map((item, id) => (
+
+                                    <tr key={item.id} className="bg-blue-400 border-b border-blue-400 hover:bg-blue-500">
+                                        <td scope="row" className="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100 flex">
+                                            <Link href={'/alunos/' + item.id}>
+                                                <AiFillEdit className='ms-2 text-dark' />
+                                            </Link>
+                                            <AiOutlineDelete
+                                                onClick={() => excluir(item.id)}
+                                                type='submit'
+                                                className='text-danger' />
+                                        </td>
+
+                                        <td className="px-2 py-2">
+                                            {item.nome}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.cpf}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.matricula}
+                                        </td>                                        
+                                        <td className="px-2 py-2">
+                                            {item.email}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.telefone}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.cep}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.logradouro}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.complemento}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.numero}
+                                        </td>
+                                        <td className="px-2 py-2">
+                                            {item.bairro}
+                                        </td>
+
+                                    </tr>
+                                ))}
+
+                            </tbody>
+                        </table>
+                    </div>
 
                 </Col>
 
