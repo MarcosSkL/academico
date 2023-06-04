@@ -25,12 +25,12 @@ const Formulario = () => {
         <Pagina titulo="Formulário">
             <Row className="px-1 mx-1">
                 <Col>
-                    <Form>
+                <Form>
                         <Form.Group className="mb-3" controlId="Semestre">
                             <Form.Label>Semestre</Form.Label>
 
                             <Form.Select type="text" {...register('semestre')} >
-                                <option value="sem nome">Selecione o Semestre</option>
+                            <option value="sem nome">Selecione o Semestre</option>
                                 <option value='1º Semestre'>1º Semestre</option>
                                 <option value='2º Semestre'>2º Semestre</option>
                                 <option value='3º Semestre'>3º Semestre</option>

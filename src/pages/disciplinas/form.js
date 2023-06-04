@@ -9,12 +9,26 @@ import axios from 'axios';
 
 const Formulario = () => {
 
+    const [cursos, setCursos] = useState([])
+
+    useEffect(() => {
+        getAll()
+    }, [])
+
+    function getAll() {
+
+        axios.get('/api/cursos').then(resultado => {
+            setCursos(resultado.data)
+
+        })
+    }
+
     const { push } = useRouter()
 
     const { register, handleSubmit } = useForm();
 
     function salvar(dados) {
-        
+
         axios.post('/api/disciplinas', dados)
         push('/disciplinas')
 
@@ -30,11 +44,20 @@ const Formulario = () => {
                             <Form.Label>Nome</Form.Label>
                             <Form.Control type="text" placeholder="Nome" {...register('nome')} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="Curso">
-                            <Form.Label>Curso</Form.Label>
-                            <Form.Control type="text" placeholder="Curso" {...register('curso')} />
+
+                        <Form.Group className="mb-3" controlId="Semestre">
+                            <Form.Label>Cursos</Form.Label>
+
+                            <Form.Select type="text" {...register('cursos')} >
+
+                                <option value="sem nome">Selecione o Curso</option>
+                                {cursos.map((item) => (
+                                    <option value={item.nome}>{item.nome}</option>
+                                ))}
+
+                            </Form.Select>
                         </Form.Group>
-                        
+
 
                         <div className='flex gap-3 justify-center'>
                             <Button variant="primary" onClick={handleSubmit(salvar)}>
