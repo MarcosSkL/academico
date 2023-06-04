@@ -31,7 +31,7 @@ const index = () => {
 
     return (
 
-        <Pagina titulo="Salas">
+        <Pagina titulo="Semestres">
             <Row className="px-1 mx-1">
                 <Col>
                     <Link href={'semestres/form/'} className='btn btn-primary text-white'>Novo</Link>
