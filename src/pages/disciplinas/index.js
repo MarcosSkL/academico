@@ -36,7 +36,7 @@ const index = () => {
                 <Col>
                     <Link href={'disciplinas/form/'} className='btn btn-primary text-white'>Novo</Link>
 
-                    <div className="relative overflow-x-scroll shadow-md sm:rounded-lg pt-2 pb-4">
+                    <div className="rounded-tr-[90px] rounded-bl-[100px] relative overflow-x-scroll shadow-md pt-2 pb-4">
                         <table className="w-full text-md text-left text-blue-100 dark:text-blue-100">
                             <thead className="text-xs text-white uppercase bg-blue-500 border-b border-blue-400 dark:text-white">
                                 <tr>
