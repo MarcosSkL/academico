@@ -11,13 +11,24 @@ const FormAlterCursos = () => {
 
     const { push } = useRouter()
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     function salvar(dados) {
-        
+
         axios.post('/api/cursos', dados)
         push('/cursos')
+    }
 
+    const validateNome = {
+        required: 'O Campo é Obrigatório',
+        minLength: {
+            value: 3,
+            message: "Quantidade minima de caracteres: 3"
+        },
+        maxLength: {
+            value: 30,
+            message: "Quantidade maxima de caracteres: 30"
+        },
     }
 
     return (
@@ -28,11 +39,15 @@ const FormAlterCursos = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="Nome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Nome" {...register('nome')} />
+                            <Form.Control type="text" placeholder="Nome" {...register('nome', validateNome)} />
+                            {
+                                errors.nome &&
+                                <small className='text-red-700'>{errors.nome.message}</small>
+                            }
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Duração">
                             <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao')} />
+                            <Form.Control type="text" placeholder="Duração" {...register('duracao', { required: true })} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Modalidade">
                             <Form.Label>Modalidade</Form.Label>
