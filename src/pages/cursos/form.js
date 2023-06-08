@@ -29,7 +29,7 @@ const FormAlterCursos = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="Nome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Nome" {...register('nome', cursoValidator.nome)} />
+                            <Form.Control type="text" placeholder="Nome" {...register('nome', cursoValidator.curso.nome)} />
                             {
                                 errors.nome &&
                                 <small className='text-red-700'>{errors.nome.message}</small>
@@ -37,7 +37,7 @@ const FormAlterCursos = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Duração">
                             <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao', cursoValidator.duracao)} />
+                            <Form.Control type="text" placeholder="Duração" {...register('duracao', cursoValidator.curso.duracao)} />
                             {
                                 errors.duracao &&
                                 <small className='text-red-700'>{errors.duracao.message}</small>
@@ -45,10 +45,10 @@ const FormAlterCursos = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Modalidade">
                             <Form.Label>Modalidade</Form.Label>
-                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade', cursoValidator.modalidade)} />
+                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade', cursoValidator.curso.modalidade)} />
                             {
-                                errors.modalidae &&
-                                <small className='text-red-700'>{errors.modalidae.message}</small>
+                                errors.modalidade &&
+                                <small className='text-red-700'>{errors.modalidade.message}</small>
                             }
                         </Form.Group>
 
