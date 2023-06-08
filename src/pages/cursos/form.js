@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios';
+import cursoValidator from '@/validators/cursoValidator';
+
 
 const FormAlterCursos = () => {
 
@@ -19,18 +21,6 @@ const FormAlterCursos = () => {
         push('/cursos')
     }
 
-    const validateNome = {
-        required: 'O Campo é Obrigatório',
-        minLength: {
-            value: 3,
-            message: "Quantidade minima de caracteres: 3"
-        },
-        maxLength: {
-            value: 30,
-            message: "Quantidade maxima de caracteres: 30"
-        },
-    }
-
     return (
 
         <Pagina titulo="Formulário">
@@ -39,7 +29,7 @@ const FormAlterCursos = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="Nome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Nome" {...register('nome', validateNome)} />
+                            <Form.Control type="text" placeholder="Nome" {...register('nome', cursoValidator.nome)} />
                             {
                                 errors.nome &&
                                 <small className='text-red-700'>{errors.nome.message}</small>
@@ -47,11 +37,19 @@ const FormAlterCursos = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Duração">
                             <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao', { required: true })} />
+                            <Form.Control type="text" placeholder="Duração" {...register('duracao', cursoValidator.duracao)} />
+                            {
+                                errors.duracao &&
+                                <small className='text-red-700'>{errors.duracao.message}</small>
+                            }
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Modalidade">
                             <Form.Label>Modalidade</Form.Label>
-                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade')} />
+                            <Form.Control type="text" placeholder="Modalidade" {...register('modalidade', cursoValidator.modalidade)} />
+                            {
+                                errors.modalidae &&
+                                <small className='text-red-700'>{errors.modalidae.message}</small>
+                            }
                         </Form.Group>
 
                         <div className='flex gap-3 justify-center'>
