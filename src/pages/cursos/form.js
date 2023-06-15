@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { mask, unmask } from 'remask'
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Row, Table, Form } from 'react-bootstrap'
 import Pagina from '../../components/Pagina'
@@ -7,18 +8,33 @@ import { useRouter } from 'next/router';
 import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios';
 import cursoValidator from '@/validators/cursoValidator';
+import handler from '../api/hello'
+import { calculateSizeAdjustValues } from 'next/dist/server/font-utils'
 
 
 const FormAlterCursos = () => {
 
     const { push } = useRouter()
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     function salvar(dados) {
 
         axios.post('/api/cursos', dados)
         push('/cursos')
+    }
+
+
+    const MaskName = (event) => {
+
+        const nome = event.target.name
+        const valor = event.target.value
+        const mascara = event.target.getAttribute("mask").split(', ')
+        
+        console.log(mascara)
+
+        
+        setValue(nome, mask(unmask(valor), mascara))
     }
 
     return (
@@ -29,7 +45,7 @@ const FormAlterCursos = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="Nome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Nome" {...register('nome', cursoValidator.curso.nome)} />
+                            <Form.Control type="text" placeholder="Nome" mask='(99) 9999-9999, (99) 99999-9999' {...register('nome', cursoValidator.curso.nome)} onChange={MaskName} />
                             {
                                 errors.nome &&
                                 <small className='text-red-700'>{errors.nome.message}</small>
