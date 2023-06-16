@@ -29,7 +29,7 @@ const FormAlterCursos = () => {
 
         const nome = event.target.name
         const valor = event.target.value
-        const mascara = event.target.getAttribute("mask").split(', ')
+        const mascara = event.target.getAttribute("mask")
         
         console.log(mascara)
 
@@ -45,7 +45,7 @@ const FormAlterCursos = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="Nome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Nome" mask='(99) 9999-9999, (99) 99999-9999' {...register('nome', cursoValidator.curso.nome)} onChange={MaskName} />
+                            <Form.Control type="text" placeholder="Nome" {...register('nome', cursoValidator.curso.nome)} />
                             {
                                 errors.nome &&
                                 <small className='text-red-700'>{errors.nome.message}</small>
@@ -53,7 +53,7 @@ const FormAlterCursos = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Duração">
                             <Form.Label>Duração</Form.Label>
-                            <Form.Control type="text" placeholder="Duração" {...register('duracao', cursoValidator.curso.duracao)} />
+                            <Form.Control type="text" placeholder="Duração" mask="99" {...register('duracao', cursoValidator.curso.duracao)} onChange={MaskName}/>
                             {
                                 errors.duracao &&
                                 <small className='text-red-700'>{errors.duracao.message}</small>
