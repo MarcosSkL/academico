@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from 'next/router';
 import { AiOutlineCheck, AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios';
+import cursoValidator from '@/validators/cursoValidator';
 
 const Formulario = () => {
 
@@ -25,7 +26,7 @@ const Formulario = () => {
 
     const { push } = useRouter()
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     function salvar(dados) {
 
@@ -42,17 +43,26 @@ const Formulario = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="Nome">
                             <Form.Label>Nome</Form.Label>
-                            <Form.Control type="text" placeholder="Nome" {...register('nome')} />
+                            <Form.Control type="text" placeholder="Nome" {...register('nome', cursoValidator.disciplina.nome)} />
+                            {
+                                errors.nome &&
+                                <small className='text-red-700'>{errors.nome.message}</small>
+                            }
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="Semestre">
                             <Form.Label>Cursos</Form.Label>
 
-                            <Form.Select type="text" {...register('cursos')} >
+                            <Form.Select type="text" {...register('cursos', cursoValidator.disciplina.curso)} >
+                            {
+                                errors.nome &&
+                                <small className='text-red-700'>{errors.nome.message}</small>
+                            }
 
                                 <option value="sem nome">Selecione o Curso</option>
                                 {cursos.map((item) => (
                                     <option key={item.id} value={item.nome}>{item.nome}</option>
+                                    
                                 ))}
 
                             </Form.Select>
