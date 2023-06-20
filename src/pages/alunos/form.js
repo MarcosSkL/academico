@@ -85,7 +85,7 @@ const Formulario = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Cep">
                             <Form.Label>CEP</Form.Label>
-                            <Form.Control type="number" placeholder="CEP" {...register('cep', cursoValidator.aluno.cep)} />
+                            <Form.Control type="text" placeholder="CEP" mask="99.999-99" {...register('cep', cursoValidator.aluno.cep)} onChange={MaskName} />
                             {
                                 errors.cep &&
                                 <small className='text-red-700'>{errors.cep.message}</small>

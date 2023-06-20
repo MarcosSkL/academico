@@ -67,7 +67,7 @@ const cursoValidator = {
         cpf: {
             required: 'O Campo é Obrigatório',
             minLength: {
-                value: 11,
+                value: 14,
                 message: "Quantidade minima de caracteres: 14"
             },
             
@@ -136,6 +136,17 @@ const cursoValidator = {
             maxLength: {
                 value: 5,
                 message: "Quantidade maxima de caracteres: 5"
+            },
+        },
+        cep: {
+            required: 'O Campo é Obrigatório',
+            minLength: {
+                value: 10,
+                message: "Quantidade minima de caracteres: 10"
+            },
+            maxLength: {
+                value: 10,
+                message: "Quantidade maxima de caracteres: 10"
             },
         },
         bairro: {
@@ -224,6 +235,17 @@ const cursoValidator = {
             maxLength: {
                 value: 5,
                 message: "Quantidade maxima de caracteres: 5"
+            },
+        },
+        cep: {
+            required: 'O Campo é Obrigatório',
+            minLength: {
+                value: 10,
+                message: "Quantidade minima de caracteres: 10"
+            },
+            maxLength: {
+                value: 10,
+                message: "Quantidade maxima de caracteres: 10"
             },
         },
         bairro: {

@@ -66,7 +66,7 @@ const Formulario = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Salario">
                             <Form.Label>Salario</Form.Label>
-                            <Form.Control type="text" placeholder="Salario" mask={["R$999.99, R$99.999.99, R$999.999.99"]} {...register('salario', cursoValidator.professor.salario)} onChange={MaskName} />
+                            <Form.Control type="text" placeholder="Salario" mask={["R$99.00, R$999.99, R$9.999.99, R$99.999.99, R$999.999.999"]} {...register('salario', cursoValidator.professor.salario)} onChange={MaskName} />
                             {
                                 errors.salario &&
                                 <small className='text-red-700'>{errors.salario.message}</small>
@@ -82,7 +82,7 @@ const Formulario = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Telefone">
                             <Form.Label>number</Form.Label>
-                            <Form.Control type="text" placeholder="Telefone" {...register('telefone', cursoValidator.professor.telefone)} />
+                            <Form.Control type="text" placeholder="Telefone" mask="(99) 9999-9999, (99) 99999-9999" {...register('telefone', cursoValidator.professor.telefone)} onChange={MaskName} />
                             {
                                 errors.telefone &&
                                 <small className='text-red-700'>{errors.telefone.message}</small>
@@ -90,7 +90,7 @@ const Formulario = () => {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="Cep">
                             <Form.Label>CEP</Form.Label>
-                            <Form.Control type="number" placeholder="CEP" {...register('cep', cursoValidator.professor.cep)} />
+                            <Form.Control type="text" placeholder="CEP" mask="99.999-999" {...register('cep', cursoValidator.professor.cep)} onChange={MaskName} />
                             {
                                 errors.cep &&
                                 <small className='text-red-700'>{errors.cep.message}</small>
